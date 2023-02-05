@@ -32,12 +32,26 @@ class GameBoard {
     }
 }
 
-// DisplayController Class: Handles UI Tasks
-class DisplayController {
-    static updateGameboard() {
-        boxes.forEach((box) => {
-            box.textContent = gameBoard.getBox(box);
+// UI Class: Handles UI Tasks
+class UI {
+    static updateGameBoard(index, sign) {
+        boxes[index].textContent = sign;
+    }
+
+    static clear() {
+        boxes.forEach((box) => box.textContent = '');
+    }
+
+    static displayWinnerMessage(currentPlayerSign) {
+        setTimeout(() => {
+            alert(`Player ${currentPlayerSign} wins!`)
         });
+    }
+
+    static displayDrawMessage() {
+        setTimeout(() => {
+            alert(`Draw!`)
+        }, 100);
     }
 }
 
@@ -46,23 +60,24 @@ class GameController {
     constructor() {
         this.playerX =  new Player('X');
         this.playerO = new Player('O');
-        this.winner = null;
+        this.currentPlayer = undefined;
         this.isOver = false;
         this.round = 1;
     }
     
     playRound(index) {
-        console.log(`Round: ${this.round} | Player: ${this.getCurrentPlayerSign()} | Index: ${index}`);
-
         gameBoard.setBox(index, this.getCurrentPlayerSign());
+        UI.updateGameBoard(index, this.getCurrentPlayerSign());
 
-        if (this.checkWinner(index)) {
-            // display winner
+        // Check for Winner
+        if (this.checkWinner(index) === true) {
+            UI.displayWinnerMessage(this.currentPlayer.sign);
             this.isOver = true;
             return;
         }
+        // Check for Draw
         if (this.round === 9) {
-            // display draw
+            UI.displayDrawMessage();
             this.isOver = true;
             return;
         }
@@ -71,9 +86,14 @@ class GameController {
     }
 
     getCurrentPlayerSign() {
+        // Odd number round - PlayerX
+        // Even number round - PlayerO
         if (this.round % 2 === 1) {
+            this.currentPlayer = this.playerX;
             return this.playerX.getSign();
+            
         } else {
+            this.currentPlayer = this.playerO;
             return this.playerO.getSign();
         }
     }
@@ -116,17 +136,18 @@ const boxes = Array.from(document.querySelectorAll('.box'));
 const restartButton = document.querySelector('.restartButton');
 
 // Event: Player Input
-boxes.forEach((box) => 
-    box.addEventListener('click', (event) => {
-        if (gameController.isOver || event.target.textContent !== '') return;
+boxes.forEach((box) => box.addEventListener('click', (event) => {
 
-        gameController.playRound(parseInt(event.target.id));
-        DisplayController.updateGameboard();
-    })
-);
+    if (gameController.isOver === true || event.target.textContent !== '') {
+        return;
+    }
+
+    gameController.playRound(parseFloat(event.target.id));
+}));
 
 // Event: Restart Button
 restartButton.addEventListener('click', () => {
     gameBoard.reset();
     gameController.reset();
+    UI.clear();
 });

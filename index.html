@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Tic Tac Toe</title>
 </head>
 <body>
@@ -13,7 +15,7 @@
         <h1 class="gameTitle">Tic Tac Toe</h1>
         <button class="restartButton">Restart</button>
 
-        <div class="gameboard">
+        <div class="gameBoard">
             <div class="box" id="0"></div>
             <div class="box" id="1"></div>
             <div class="box" id="2"></div>
@@ -24,7 +26,13 @@
             <div class="box" id="7"></div>
             <div class="box" id="8"></div>
         </div>
+        <div class="gameMessage"></div>
     </div>
+
+    <footer class="footer">
+        <button onclick="location.href='https://github.com/muadzyamani/odin-library'" class="github"><i class="fa fa-github"></i></button>
+        <div class="name">Muadz Yamani</div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

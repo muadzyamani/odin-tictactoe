@@ -9,7 +9,7 @@
     --offwhite: #dedede;
     --green: #238636;
     --darkblue: #0d1117;
-    --winning-blocks: #2d414b;
+    --darkblue2: #161b22;
 }
 
 body {
@@ -44,9 +44,14 @@ h1 {
     align-items: center;
     justify-content: center;
     color: var(--offwhite);
-    font-size: 120px;
+    font-size: 60px;
     border-right: 2px solid;
     border-bottom: 2px solid;
+}
+
+.box:hover {
+    cursor: pointer;
+    background-color: var(--darkblue2);
 }
 
 .box:nth-child(3n) {

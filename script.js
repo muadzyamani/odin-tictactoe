@@ -40,17 +40,18 @@ class UI {
 
     static clear() {
         boxes.forEach((box) => box.textContent = '');
+        gameMessage.textContent = '';
     }
 
     static displayWinnerMessage(currentPlayerSign) {
         setTimeout(() => {
-            alert(`Player ${currentPlayerSign} wins!`)
-        });
+            gameMessage.textContent = `Player ${currentPlayerSign} wins!`;
+        }, 100);
     }
 
     static displayDrawMessage() {
         setTimeout(() => {
-            alert(`Draw!`)
+            gameMessage.textContent = `Draw!`;
         }, 100);
     }
 }
@@ -134,6 +135,7 @@ const gameController = new GameController();
 // Constant DOM Elements
 const boxes = Array.from(document.querySelectorAll('.box'));
 const restartButton = document.querySelector('.restartButton');
+const gameMessage = document.querySelector('.gameMessage');
 
 // Event: Player Input
 boxes.forEach((box) => box.addEventListener('click', (event) => {
